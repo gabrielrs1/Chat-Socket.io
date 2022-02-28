@@ -4,22 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatIo</title>
+    <title>Chat.io</title>
 
-    <link rel="stylesheet" href="/public/styles/style.css">
+    <!-- <link rel="stylesheet" href="../../public/styles/style.css"> -->
 </head>
 <body>
-    <div class="messages"></div>
+    <div>
+        <ul id="ul">
 
-    <form class="form" action="">
-        <input type="text">
+        </ul>
+    </div>
+
+    <form id="form" action="">
+        <input id="input" type="text">
+
+        <button type="submit" id="send">Enviar</button>
     </form>
-
-    <button class="send">Enviar</button>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        var socket = io();
+        let socket = io();
+
+        let messages = document.getElementById("ul");
+        let form = document.getElementById("form");
+        let input = document.getElementById("input");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            if(input.value) {
+                socket.emit("chat-message", input.value);
+                input.value = '';
+            }
+        });
+
+        socket.on("chat-message", (msg) => {
+            let message = document.createElement("li");
+            message.textContent = msg;
+            messages.appendChild(message);
+        });
     </script>
 </body>
 </html>

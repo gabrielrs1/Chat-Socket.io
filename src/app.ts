@@ -11,7 +11,11 @@ app.get("/", (request, response) => {
 });
 
 io.on("connection", (socket) => {
+    socket.on("chat-message", (msg) => {
+        io.emit("chat-message", msg);
+    })
+    
     console.log("user connected");
 })
 
-server.listen(4000, () => { console.log("Server Connected.") });
+server.listen(3000, () => { console.log("Server Connected.") });
