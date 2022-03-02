@@ -6,6 +6,8 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+app.use(express.static("public"));
+
 app.get("/", (request, response) => {
     return response.sendFile(__dirname + "/view/index.html");
 });
