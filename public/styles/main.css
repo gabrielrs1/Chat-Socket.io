@@ -32,7 +32,10 @@ body {
 }
 
 .network aside ul li {
+    height: 45px;
+
     display: flex;
+    justify-content: space-between;
     align-items: center;
 
     margin-bottom: 10px;
@@ -42,11 +45,17 @@ body {
 
     background: linear-gradient(90deg, var(--purple-800), #0000);
 }
- 
-.network aside ul li img {
-    width: 50px;
-    border-radius: 40%;
-    margin-right: 10px;
+
+.network aside ul li::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    margin-left: 10px;
+
+    background: var(--green-400);
 }
 
 .network aside ul li p {
