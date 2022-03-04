@@ -9,13 +9,17 @@ const io = new Server(server);
 app.use(express.static("public"));
 
 app.get("/", (request, response) => {
-    return response.sendFile(__dirname + "/view/index.html");
+    return response.sendFile(__dirname + "/view/chat.html");
 });
 
 io.on("connection", (socket) => {
+    socket.on("user", (name) => {
+        io.emit("user", name);
+    });
+
     socket.on("chat-message", (msg) => {
-        io.emit("chat-message", msg);
-    })
+        socket.broadcast.emit("chat-message", msg);
+    });
     
     console.log("user connected");
 })
