@@ -1,0 +1,51 @@
+.users {
+    display: inline-block;
+    width: 250px;
+    height: 100%;
+    
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    border: 2px solid var(--purple-750);
+    
+    .userList {
+        margin: 10px 10px 0 10px;
+        
+        li {
+            height: 45px;
+        
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        
+            margin-bottom: 10px;
+            padding: 5px 12px;
+        
+            border-radius: 10px;
+        
+            background: linear-gradient(90deg, var(--purple-800), #0000);
+        }
+        
+        li::after {
+            content: "";
+            width: 10px;
+            height: 10px;
+        
+            border-radius: 50%;
+        
+            margin-left: 10px;
+        
+            background: var(--green-400);
+        }
+        
+        p {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        
+            color: var(--purple-300);
+        }
+    }
+}
+
+

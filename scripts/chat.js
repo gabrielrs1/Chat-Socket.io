@@ -1,22 +1,20 @@
-let socket = io();
+// let messages = document.getElementById("ul");
+// let form = document.getElementById("form");
+// let input = document.getElementById("input");
 
-let messages = document.getElementById("ul");
-let form = document.getElementById("form");
-let input = document.getElementById("input");
+// form.addEventListener("submit", (event) => {
+//     event.preventDefault();
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
+//     if(input.value) {
+//         socket.emit("chat-message", input.value);
 
-    if(input.value) {
-        socket.emit("chat-message", input.value);
+//         let user = true;
 
-        let user = true;
+//         listMessage(input.value, user);
 
-        listMessage(input.value, user);
-
-        input.value = "";
-    }
-});
+//         input.value = "";
+//     }
+// });
 
 socket.on("chat-message", (msg) => {
     listMessage(msg);

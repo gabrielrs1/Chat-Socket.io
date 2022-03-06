@@ -26,6 +26,10 @@ html, body {
     font-family: "Roboto", sans-serif;
 
     background: var(--purple-900);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media(max-width: 1000px) {
