@@ -15,7 +15,6 @@ export function Modal({ closeModal, modalIsOpen, socket }: IProps) {
     function handleGetName(event: FormEvent) {
         event.preventDefault();
 
-        // socket.emit("users", username);
         socket.auth = { username };
         socket.connect();
 

@@ -27,10 +27,6 @@ io.use((socket: ISocket, next) => {
 });
 
 io.on("connection", (socket) => {
-    // socket.on("users", (user) => {
-    //     io.emit("users", user);
-    // })
-
     const users = [];
 
     for (let [id, socket] of io.of("/").sockets) {
