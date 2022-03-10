@@ -32,6 +32,16 @@ html, body {
     align-items: center;
 }
 
+.network {
+    position: relative;
+    display: flex;
+
+    width: 1080px;
+    height: 80vh;
+
+    margin: 0 20px;
+}
+
 @media(max-width: 1000px) {
     html {
         font-size: 93.75%;

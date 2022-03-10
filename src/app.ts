@@ -1,21 +1,48 @@
 import express from "express";
-import { createServer } from "http";
-import { Server } from "socket.io";
+import http from "http";
+import { Server, Socket } from "socket.io";
 
 const app = express();
-const httpServer = createServer(app);
-const io = new Server(httpServer, {
+const serverHttp = http.createServer(app);
+const io = new Server(serverHttp, {
     cors: {
-        origin: "http://localhost:3000"
+        origin: "*"
     }
 });
 
-io.on("connection", (socket) => {
-    socket.on("message", (msg) => {
-        socket.broadcast.emit("message", msg);
-    })
+interface ISocket extends Socket {
+    username?: string;
+}
 
-    console.log("user connected");
+io.use((socket: ISocket, next) => {
+    const username = socket.handshake.auth.username;
+
+    if (!username) {
+      return next(new Error("invalid username"));
+    }
+
+    socket.username = username;
+
+    next();
 });
 
-httpServer.listen(4000);
+io.on("connection", (socket) => {
+    // socket.on("users", (user) => {
+    //     io.emit("users", user);
+    // })
+
+    const users = [];
+
+    for (let [id, socket] of io.of("/").sockets) {
+        users.push({
+            userID: id,
+            username: (socket as ISocket).username,
+        });
+    }
+
+    io.emit("users", users);
+
+    console.log(`user ${socket.id}`);
+});
+
+serverHttp.listen(4000, () => console.log("connected server"));

@@ -3,10 +3,14 @@ import { Users } from "../Users";
 
 import styles from "./styles.module.scss";
 
-export function Home() {
+type IUsername = {
+    username: string;
+}
+
+export function Home({ username }: IUsername) {
     return(
         <div className={styles.network}>
-            <Users />
+            <Users username={username} />
             <Chat />
         </div>
     );

@@ -1,15 +1,29 @@
-import { socketConnect } from "../../services/socket";
-
+import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 
-export function Users() {
-    const socket = socketConnect();
+type IUsers = {
+    username: string;
+}
 
-    // socket.auth = ;
+export function Users({ socket }: any) {
+    const [username, setUsername] = useState<string[]>([]);
 
-    return(
+    useEffect(() => {
+        socket.on("users", (user: any) => {
+            // console.log(user)
+            console.log(user)
+            user.forEach((name: any) => {
+                setUsername((prevName) => [...prevName, name.username]);
+            });
+        });
+    }, []);
+
+    return (
         <aside className={styles.users}>
-            <ul id="users-list" className={styles.userList}>
+            <ul className={styles.userList}>
+                {username.map((name, index) => (
+                    <li key={index}>{name}</li>
+                ))}
             </ul>
         </aside>
     );

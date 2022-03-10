@@ -4,7 +4,7 @@ import { socketConnect } from "../../services/socket";
 import styles from "./styles.module.scss";
 
 export function Chat() {
-    const socket = socketConnect();
+    // const socket = socketConnect();
 
     const [text, setText] = useState("");
     const [message, setMessage] = useState<string[]>([]);
@@ -12,7 +12,7 @@ export function Chat() {
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
 
-        socket.emit("message", text);
+        // socket.emit("message", text);
 
         setMessage((prevText) => [ ...prevText, text ]);
 
@@ -20,13 +20,13 @@ export function Chat() {
     }
 
     useEffect(() => {
-        socket.on("message", (msg) => {
-            console.log("aq", msg)
-            setMessage((prevText) => [ ...prevText, msg ]);
-        });
+        // socket.on("message", (msg) => {
+        //     console.log("aq", msg)
+        //     setMessage((prevText) => [ ...prevText, msg ]);
+        // });
     }, []);
     
-    return(
+    return (
         <div className={styles.chat}>
             <ul className={styles.messages}>
                 {message.map((msg, i) => (
