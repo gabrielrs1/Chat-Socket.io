@@ -38,6 +38,10 @@ io.on("connection", (socket) => {
 
     io.emit("users", users);
 
+    socket.on("message", (msg) => {
+        socket.broadcast.emit("message", msg);
+    })
+
     console.log(`user ${socket.id}`);
 });
 
