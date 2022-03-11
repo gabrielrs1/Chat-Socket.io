@@ -42,7 +42,7 @@ export function Chat({ socket }: any) {
             </ul>
         
             <form onSubmit={handleSubmit} className={styles.form}>
-                <input type="text" value={text} onChange={(event) => setText(event.target.value)}/>
+                <input type="text" placeholder="Escreva sua mensagem..." value={text} onChange={(event) => setText(event.target.value)}/>
                 <button type="submit">Enviar</button>
             </form>
         </div>

@@ -5,14 +5,16 @@
 }
 
 :root {
-    --white: #ffffff;
+    --white: #f1f1f1;
     
     --purple-900: #12111c;
     --purple-800: #19182b;
-    --purple-750: #1e192a;
+    --purple-750: #271f38;
     --purple-600: #4d38a2;
     --purple-500: #7a4bd8;
     --purple-300: #afa3c6;
+
+    --blue-1000: #4aa6fb;
 
     --green-400: #02be1b;
 
@@ -26,20 +28,6 @@ html, body {
     font-family: "Roboto", sans-serif;
 
     background: var(--purple-900);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.network {
-    position: relative;
-    display: flex;
-
-    width: 1080px;
-    height: 80vh;
-
-    margin: 0 20px;
 }
 
 @media(max-width: 1000px) {

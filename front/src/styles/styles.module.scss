@@ -1,0 +1,24 @@
+.network {
+    background: linear-gradient(200deg, #4aa5fb15, #12111c00 30%),
+                linear-gradient(320deg, #7a4bd815, #12111c00 40%),
+                linear-gradient(50deg, #4d38a215, #12111c00 40%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 100;
+    
+    height: 100vh;
+
+    .content {
+        position: relative;
+        display: flex;
+    
+        width: 100%;
+        max-width: 1080px;
+        height: 80vh;
+    
+        margin: 0 20px;
+    }
+}

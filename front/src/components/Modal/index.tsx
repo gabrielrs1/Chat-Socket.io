@@ -30,7 +30,7 @@ export function Modal({ closeModal, modalIsOpen, socket }: IProps) {
          className={styles.modalContent}
         >
             <h1 className={styles.title}>Chat.io</h1>
-            <form onSubmit={handleGetName}>
+            <form onSubmit={handleGetName} className={styles.form}>
                 <input 
                  type="text"
                  value={username}

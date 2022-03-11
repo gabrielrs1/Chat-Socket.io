@@ -1,17 +1,15 @@
 import { useState } from "react";
 
-import { io } from "socket.io-client";
-
-// import { SocketContextProvider } from "./context/SocketContext";
+import { socketConnect } from "./services/socket";
 
 import { Chat } from "./components/Chat";
 import { Modal } from "./components/Modal";
 import { Users } from "./components/Users";
 
 import "./styles/global.module.scss";
-import styles from "./styles/global.module.scss";
+import styles from "./styles/styles.module.scss";
 
-const socket = io("http://localhost:4000", { autoConnect: true });
+const socket = socketConnect();
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(true);
@@ -22,13 +20,15 @@ function App() {
 
   return (
     <div className={styles.network}>
-      <Users socket={socket} />
-      <Chat />
-      <Modal
-       closeModal={closeModal}
-       modalIsOpen={modalIsOpen}
-       socket={socket}
-      />
+      <div className={styles.content}>
+        <Users socket={socket} />
+        <Chat socket={socket} />
+        <Modal
+        closeModal={closeModal}
+        modalIsOpen={modalIsOpen}
+        socket={socket}
+        />
+       </div>
     </div>
   )
 }
