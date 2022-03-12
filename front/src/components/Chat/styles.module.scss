@@ -5,51 +5,24 @@
     border-top: 2px solid var(--purple-750);
     border-right: 2px solid var(--purple-750);
     border-bottom: 2px solid var(--purple-750);
-    
+
     .messages {
         height: 91%;
-    
+
         padding: 20px 20px 60px 20px;
         font-size: 1rem;
         color: var(--white);
-    
+
         overflow: auto;
-        
-        .user {
-           list-style: none;
-           background: var(--purple-500);
-        
-           max-width: 400px;
-           
-           margin: 0 0 10px auto;
-           padding: 7px 20px;
-           
-           line-height: 30px;
-           border-radius: 20px;
-        }
-
-        .notUser {
-            list-style: none;
-            background: var(--purple-600);
-            
-            max-width: 400px;
-            
-            margin-bottom: 10px;
-            padding: 7px 20px;
-            
-            line-height: 30px;
-            border-radius: 20px;
-        }
     }
-
 
     .form {
         bottom: 0px;
         position: absolute;
         width: 100%;
-    
+
         padding: 10px;
-    
+
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -100,8 +73,3 @@
         }
     }
 }
-
-
-
-
-

@@ -11,8 +11,15 @@ import styles from "./styles/styles.module.scss";
 
 const socket = socketConnect();
 
+type IUser = {
+  userID: string;
+  username: string;
+}
+
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(true);
+
+  const [username, setUsername] = useState<IUser[]>([]);
 
   function closeModal() {
     setModalIsOpen(false);
@@ -21,12 +28,12 @@ function App() {
   return (
     <div className={styles.network}>
       <div className={styles.content}>
-        <Users socket={socket} />
-        <Chat socket={socket} />
+        <Users socket={socket} username={username} setUsername={setUsername} />
+        <Chat socket={socket} username={username} />
         <Modal
-        closeModal={closeModal}
-        modalIsOpen={modalIsOpen}
-        socket={socket}
+         closeModal={closeModal}
+         modalIsOpen={modalIsOpen}
+         socket={socket}
         />
        </div>
     </div>

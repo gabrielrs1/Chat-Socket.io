@@ -18,7 +18,7 @@ io.use((socket: ISocket, next) => {
     const username = socket.handshake.auth.username;
 
     if (!username) {
-      return next(new Error("invalid username"));
+        return next(new Error("invalid username"));
     }
 
     socket.username = username;
@@ -39,8 +39,12 @@ io.on("connection", (socket) => {
     io.emit("users", users);
 
     socket.on("message", (msg) => {
-        socket.broadcast.emit("message", msg);
-    })
+        const users = msg.user;
+
+        const user = users.find((element: any) => element.userID == socket.id);
+
+        socket.broadcast.emit("message", { msg: msg.text, user });
+    });
 
     console.log(`user ${socket.id}`);
 });
