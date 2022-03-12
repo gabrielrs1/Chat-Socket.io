@@ -32,7 +32,7 @@ export function Chat({ socket, username }: any) {
                 ...prevText, {
                     message: msg.msg,
                     myMessage: false,
-                    user: msg.user.username
+                    user: msg.findUser.username
                 }
             ]);
         });

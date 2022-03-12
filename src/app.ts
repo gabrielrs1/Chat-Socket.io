@@ -10,40 +10,34 @@ const io = new Server(serverHttp, {
     }
 });
 
-interface ISocket extends Socket {
-    username?: string;
-}
-
-io.use((socket: ISocket, next) => {
-    const username = socket.handshake.auth.username;
-
-    if (!username) {
-        return next(new Error("invalid username"));
-    }
-
-    socket.username = username;
-
-    next();
-});
+let users: any = [];
 
 io.on("connection", (socket) => {
-    const users = [];
-
-    for (let [id, socket] of io.of("/").sockets) {
+    socket.on("users", (user) => {
         users.push({
-            userID: id,
-            username: (socket as ISocket).username,
+            userID: socket.id,
+            username: user
         });
-    }
 
-    io.emit("users", users);
+        io.emit("users", users);
+    });
 
     socket.on("message", (msg) => {
-        const users = msg.user;
+        const user = msg.user;
 
-        const user = users.find((element: any) => element.userID == socket.id);
+        const findUser = user.find((user: any) => user.userID == socket.id);
 
-        socket.broadcast.emit("message", { msg: msg.text, user });
+        socket.broadcast.emit("message", { msg: msg.text, findUser });
+    });
+
+    socket.on("disconnect", () => {
+        users.filter((element: any, index: number) => {
+            if(element.userID == socket.id) {
+                users.splice(index, 1);
+            }
+        });
+
+        io.emit("users", users);
     });
 
     console.log(`user ${socket.id}`);

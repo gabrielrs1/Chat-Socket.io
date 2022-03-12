@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { socketConnect } from "./services/socket";
 
@@ -17,6 +17,11 @@ type IUser = {
 }
 
 function App() {
+  useEffect(() => {
+    socket.disconnect();
+  }, []);
+
+
   const [modalIsOpen, setModalIsOpen] = useState(true);
 
   const [username, setUsername] = useState<IUser[]>([]);
