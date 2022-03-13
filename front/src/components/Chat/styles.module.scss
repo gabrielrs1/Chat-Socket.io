@@ -7,13 +7,23 @@
     border-bottom: 2px solid var(--purple-750);
 
     .messages {
-        height: 91%;
+        height: 100%;
 
         padding: 20px 20px 60px 20px;
         font-size: 1rem;
         color: var(--white);
 
         overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: 7px;
+            height: 8px;
+            background-color: var(--purple-800);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--purple-500);
+        }
     }
 
     .form {
@@ -26,6 +36,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        background: var(--purple-900);
         
         input {
             width: 70%;

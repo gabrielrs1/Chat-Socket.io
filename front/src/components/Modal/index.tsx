@@ -16,7 +16,7 @@ export function Modal({ closeModal, modalIsOpen, socket }: IProps) {
         event.preventDefault();
 
         socket.connect();
-        socket.emit("users", username);
+        socket.emit("user", username);
 
         setUsername("");
 

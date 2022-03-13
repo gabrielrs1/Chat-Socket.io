@@ -24,7 +24,7 @@ function App() {
 
   const [modalIsOpen, setModalIsOpen] = useState(true);
 
-  const [username, setUsername] = useState<IUser[]>([]);
+  const [users, setUsers] = useState<IUser[]>([]);
 
   function closeModal() {
     setModalIsOpen(false);
@@ -33,8 +33,12 @@ function App() {
   return (
     <div className={styles.network}>
       <div className={styles.content}>
-        <Users socket={socket} username={username} setUsername={setUsername} />
-        <Chat socket={socket} username={username} />
+        <Users 
+         socket={socket}
+         users={users}
+         setUsers={setUsers}
+        />
+        <Chat socket={socket} users={users} />
         <Modal
          closeModal={closeModal}
          modalIsOpen={modalIsOpen}

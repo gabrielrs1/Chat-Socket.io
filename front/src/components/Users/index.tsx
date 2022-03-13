@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import styles from "./styles.module.scss";
 
 type IUser = {
@@ -6,18 +6,28 @@ type IUser = {
     username: string;
 }
 
-export function Users({ socket, username, setUsername }: any) {
+type IProps = {
+    socket: any;
+    users: IUser[];
+    setUsers: Dispatch<SetStateAction<IUser[]>>
+}
+
+export function Users({ socket, users, setUsers }: IProps) {
     useEffect(() => {
-        socket.on("users", (user: IUser[]) => {
-            setUsername(user);
+        socket.on("user", (user: IUser[]) => {
+            setUsers(user);
         });
     }, []);
 
     return (
         <aside className={styles.users}>
             <ul className={styles.userList}>
-                {username.map((data: IUser, index: number) => (
-                    <li key={index}>{data.username}</li>
+                {users.map((user: IUser, index: number) => (
+                    <li key={index}>
+                        <p title={user.username}>
+                            {user.username}
+                        </p>
+                    </li>
                 ))}
             </ul>
         </aside>

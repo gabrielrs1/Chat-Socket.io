@@ -3,23 +3,42 @@ import { Message } from "./styles";
 
 import styles from "./styles.module.scss";
 
-export function Chat({ socket, username }: any) {
+type User = {
+    userID: string;
+    username: string;
+}
+
+type IProps = {
+    socket: any;
+    users: User[]
+}
+
+type Message = {
+    message: string;
+    user: User;
+}
+
+type IPropsMessage = {
+    message: string,
+    user: string;
+}
+
+export function Chat({ socket, users }: IProps) {
     const [text, setText] = useState("");
 
-    const [message, setMessage] = useState<any>([]);
+    const [messages, setMessages] = useState<User[]>([]);
 
     function handleSubmit(event: FormEvent) {
         event.preventDefault();
 
-        socket.emit("message", {
-            text: text,
-            user: username
+        socket.emit("chat-message", {
+            message: text,
+            users
         });
 
-        setMessage((prevText: any) => [
+        setMessages((prevText: any) => [
             ...prevText, {
-                message: text,
-                myMessage: true
+                message: text
             }
         ]);
 
@@ -27,12 +46,11 @@ export function Chat({ socket, username }: any) {
     }
 
     useEffect(() => {
-        socket.on("message", (msg: any) => {
-            setMessage((prevText: any) => [
+        socket.on("chat-message", ({ message, user }: Message) => {
+            setMessages((prevText: any) => [
                 ...prevText, {
-                    message: msg.msg,
-                    myMessage: false,
-                    user: msg.findUser.username
+                    message,
+                    user: user.username
                 }
             ]);
         });
@@ -41,16 +59,22 @@ export function Chat({ socket, username }: any) {
     return (
         <div className={styles.chat}>
             <ul className={styles.messages}>
-                {message.map((msg: any, index: number) => (
-                    <Message key={index} msg={msg.user}>
+                {messages.map((msg: any, index: number) => (
+                    <Message key={index} user={msg.user}>
                         {msg.message}
-                        <span>{msg.user ? msg.user + ":" : "Me:"}</span>
+                        <p>
+                            {msg.user ? msg.user + ":" : "Me:"}
+                        </p>
                     </Message>
                 ))}
             </ul>
         
             <form onSubmit={handleSubmit} className={styles.form}>
-                <input type="text" placeholder="Escreva sua mensagem..." value={text} onChange={(event) => setText(event.target.value)}/>
+                <input 
+                 type="text"
+                 placeholder="Escreva sua mensagem..."
+                 value={text} onChange={(event) => setText(event.target.value)}
+                />
                 <button type="submit">Enviar</button>
             </form>
         </div>

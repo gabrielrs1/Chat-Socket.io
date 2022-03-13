@@ -10,34 +10,44 @@ const io = new Server(serverHttp, {
     }
 });
 
-let users: any = [];
+type IUser = {
+    userID: string;
+    username: string;
+}
+
+type IMessage = {
+    message: string;
+    users: IUser[];
+}
+
+let users: IUser[] = [];
 
 io.on("connection", (socket) => {
-    socket.on("users", (user) => {
+    socket.on("user", (username: string) => {
         users.push({
             userID: socket.id,
-            username: user
+            username
         });
-
-        io.emit("users", users);
+        
+        io.emit("user", users);
     });
 
-    socket.on("message", (msg) => {
-        const user = msg.user;
+    socket.on("chat-message", ({ message, users }: IMessage) => {
+        const user = users.find((user: IUser) => {
+            return user.userID == socket.id
+        });
 
-        const findUser = user.find((user: any) => user.userID == socket.id);
-
-        socket.broadcast.emit("message", { msg: msg.text, findUser });
+        socket.broadcast.emit("chat-message", { message, user });
     });
 
     socket.on("disconnect", () => {
-        users.filter((element: any, index: number) => {
-            if(element.userID == socket.id) {
+        users.filter((user: IUser, index: number) => {
+            if(user.userID == socket.id) {
                 users.splice(index, 1);
             }
         });
 
-        io.emit("users", users);
+        io.emit("user", users);
     });
 
     console.log(`user ${socket.id}`);

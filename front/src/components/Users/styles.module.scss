@@ -8,14 +8,23 @@
 
     border: 2px solid var(--purple-750);
     
+    &::-webkit-scrollbar {
+        width: 7px;
+        height: 8px;
+        background-color: var(--purple-800);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--purple-600);
+    }
+    
     .userList {
         margin: 10px 10px 0 10px;
-        
+
         li {
             height: 45px;
         
             display: flex;
-            justify-content: space-between;
             align-items: center;
         
             margin-bottom: 10px;
@@ -26,6 +35,13 @@
             color: var(--purple-300);
         
             background: linear-gradient(90deg, var(--purple-800), #0000);
+        
+            p {
+                max-width: 15ch;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
         }
         
         li::after {
@@ -38,14 +54,6 @@
             margin-left: 10px;
         
             background: var(--green-400);
-        }
-        
-        p {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        
-            color: var(--purple-300);
         }
     }
 }
