@@ -13,6 +13,9 @@
         font-size: 1rem;
         color: var(--white);
 
+        display: flex;
+        flex-direction: column;
+
         overflow: auto;
 
         &::-webkit-scrollbar {
@@ -27,7 +30,7 @@
     }
 
     .form {
-        bottom: 0px;
+        bottom: -1px;
         position: absolute;
         width: 100%;
 
@@ -83,5 +86,12 @@
         
             transition: 0.3s;
         }
+    }
+
+    @media(max-width: 700px) {
+        border-top: 0;
+        border-left: 2px solid var(--purple-750);
+
+        height: 80%;
     }
 }

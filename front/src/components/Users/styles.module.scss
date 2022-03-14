@@ -9,8 +9,8 @@
     border: 2px solid var(--purple-750);
     
     &::-webkit-scrollbar {
-        width: 7px;
-        height: 8px;
+        width: 8px;
+        height: 7px;
         background-color: var(--purple-800);
     }
 
@@ -25,6 +25,7 @@
             height: 45px;
         
             display: flex;
+            justify-content: space-between;
             align-items: center;
         
             margin-bottom: 10px;
@@ -37,7 +38,7 @@
             background: linear-gradient(90deg, var(--purple-800), #0000);
         
             p {
-                max-width: 15ch;
+                max-width: 11ch;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -54,6 +55,25 @@
             margin-left: 10px;
         
             background: var(--green-400);
+        }
+    }
+
+    @media(max-width: 700px) {
+        width: auto;
+        height: auto;
+
+        overflow-y: hidden;
+        overflow-x: auto;
+
+        display: flex;
+
+        .userList {
+            display: flex;
+            align-items: center;
+            
+            li {
+                width: 178px;
+            }
         }
     }
 }

@@ -18,11 +18,6 @@ type Message = {
     user: User;
 }
 
-type IPropsMessage = {
-    message: string,
-    user: string;
-}
-
 export function Chat({ socket, users }: IProps) {
     const [text, setText] = useState("");
 
