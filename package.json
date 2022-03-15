@@ -1,14 +1,16 @@
 {
-  "scripts": {
-    "dev": "ts-node-dev src/app.ts"
-  },
-  "dependencies": {
-    "express": "^4.17.3",
-    "socket.io": "^4.4.1"
+  "name": "monorepo",
+  "version": "1.0.0",
+  "repository": "https://github.com/gabrielrs1/Chat-Socket.io.git",
+  "author": "Gabriell-Ribeiro <gabriellribeiro208@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
   },
   "devDependencies": {
-    "@types/express": "^4.17.13",
-    "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.2"
   }
 }
