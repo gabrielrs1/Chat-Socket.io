@@ -12,5 +12,10 @@
   },
   "devDependencies": {
     "typescript": "^4.6.2"
+  },
+  "scripts": {
+    "server": "yarn workspace @monorepo/server dev",
+    "web": "yarn workspace @monorepo/web dev",
+    "build": "yarn workspace @monorepo/web build"
   }
 }
